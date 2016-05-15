@@ -17,6 +17,21 @@ class Vagonas:
             print(self.maseKroviniu)
             return True
         return False
+
+    def getVagName(self):
+        return self.name
+    
+    def getVagMase(self):
+        return self.mase
+    
+    def getVagMaxMase(self):
+        return self.maxMase
+
+    def getVagId(self):
+        return self.id
+
+    def getVagMaseKroviniu(self):
+        return self.maseKroviniu
             
      
 ##        

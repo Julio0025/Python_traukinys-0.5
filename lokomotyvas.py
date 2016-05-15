@@ -3,12 +3,18 @@ class Lokomotyvas:
         self.name = name
         self.mase = mase
         self.tempGalia = tempGalia
-        self.id = id
     def __sub__(a, b):
         return a-b
+
+    def getLokName(self):
+        return self.name
     
-    def info():
-        return self.name, self.mase, self.id
+    def getLokMase(self):
+        return self.mase
+    
+    def getLokGalia(self):
+        return self.tempGalia
+
     
 ##    def getLokomotyvas(self):
 ##        return 
