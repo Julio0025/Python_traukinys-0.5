@@ -1,9 +1,9 @@
 class Vagonas:
-    def __init__(self,name, mase, maxMase):
+    def __init__(self,name, mase, maxMase,ID):
         self.name = name
         self.mase = mase
         self.maxMase = maxMase
-        self.id = id
+        self.ID = ID
         self.maseKroviniu = 0
     
 
@@ -28,7 +28,7 @@ class Vagonas:
         return self.maxMase
 
     def getVagId(self):
-        return self.id
+        return self.ID
 
     def getVagMaseKroviniu(self):
         return self.maseKroviniu

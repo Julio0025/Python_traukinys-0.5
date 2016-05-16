@@ -19,11 +19,11 @@ class Traukinys():
         else:
             return print("lokomotyvo tempiamoji galia negali buti mazesne uz jo mase")
         
-    def addVagonas(self, name, mase, maxMase):
+    def addVagonas(self, name, mase, maxMase, ID):
         if self.galiaTrauk < self.bendraMase + mase:
             return print("virsyta mase, kuria gali tempti dabartiniai lokomotyvai")
         else:
-            self.vagonai.append(Vagonas(name,mase,maxMase))
+            self.vagonai.append(Vagonas(name,mase,maxMase, ID))
             self.bendraMase += mase
         
     def getGaliaTrauk(self):
@@ -57,42 +57,46 @@ class Traukinys():
             return print("nepavyko prideti, reikia didesniu vagonu")
  
     def saveTraukinys(self):
-        name = self.getTrainName()
-        with open('%s.json' % name, 'w') as fp:
-            lokomotyvai = {}
-            
-            vagonai = {}
-##            for vagonas in self.vagonai:
-##                vagonas["%s"],
-##                vagonas[],
-##                vagonas[],
-##                vagonas[],
-##                vagonas[],
-            data = {"name":self.nameTraukinys,
-                    "bendra_mase_kroviniu":self.bendraKroviniuMase,
-                    "galia_traukinio":self.galiaTrauk,
-                    "bendra mase traukinio":self.bendraMase,
-                    "lokomotyvai":lokomotyvai
-                                   ##   "vagonai":self.vagonai,
-                    }
-
-                lokomotyvas in self.lokomotyvai:
-                    lokomotyvas.getLokName = {}
-                    lokomotyvas.getLokName["%s"% lokomotyvas.getLokName()] = lokomotyvas.getLokName()
-                    lokomotyvas.getLokName["Lokomotyvas_%s_mase" % lokomotyvas.getLokName()] = lokomotyvas.getLokMase()
-                    lokomotyvas.getLokName["Lokomotyvas_%s_galia" % lokomotyvas.getLokName()] = lokomotyvas.getLokGalia()
+        with open('traukiniai.json' , 'a') as fp:
+            traukinys = {
+                "traukinys":self.nameTraukinys,
+                "bendra_mase_kroviniu":self.bendraKroviniuMase,
+                "galia_traukinio":self.galiaTrauk,
+                "bendra mase traukinio":self.bendraMase,
+                }
+            fp.write(json.dumps(traukinys))
+            fp.write("\n")
+            fp.close()
+           
+        with open('lokomotyvai.json', 'a') as fp:
+     	      for lokomotyvas in self.lokomotyvai:
+                lokomotyvai = {} 
+                lokomotyvai = { 
+                "traukinys" : self.nameTraukinys,
+                "lokomotyvas" : lokomotyvas.getLokName(),
+                "mase"  : lokomotyvas.getLokMase(),
+                "galia"  : lokomotyvas.getLokGalia()}
+                fp.write(json.dumps(lokomotyvai))
+                fp.write("\n")
+        fp.close()
                 
-                        
-                   ## "lokomotyvai":self.lokomotyvai,
-
-            
+        with open('vagonai.json', 'a') as fp:
+            for vagonas in self.vagonai:
+                vagonai = {}
+                vagonai = {
+                "traukinys":self.nameTraukinys,
+                "vagonas" :vagonas.getVagName(),
+                "mase" :vagonas.getVagMase(),
+                "max_mase" : vagonas.getVagMaxMase(),
+                "kroviniu_mase" : vagonas.getVagMaseKroviniu(),
+                "ID" : vagonas.getVagId()}
+                fp.write(json.dumps(vagonai))
+                fp.write("\n")
                 
-            json.dump(data, fp)
-        
+        fp.close()
+           
+           
 
-             
-            
-    
     def __sub__(a, b):
         return a-b
     
@@ -121,13 +125,13 @@ a.addLokomotyvas(" Antano_loko ",100,500)
 a.addLokomotyvas("Petro_loko", 80,300)
 a.addLokomotyvas("Smetonos_loko",100,500)
 ##print(a.getLokomotyvas)
-a.addVagonas("vagons1",40,500)
+a.addVagonas("vagons1",40,500, 350)
 ##import pdb; pdb.set_trace()
-a.addVagonas("vagons_2",50,300)
-a.addVagonas("rimtas",50,500)
+a.addVagonas("vagons_2",50,300,123)
+a.addVagonas("rimtas",50,500,343)
 a.pakrautiKrovini(500)
 a.pakrautiKrovini(100)
-a.pakrautiKrovini(200)
+a.pakrautiKrovini(600)
 a.saveTraukinys()
 ##print (a.bendraMase)
 
