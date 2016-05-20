@@ -19,7 +19,7 @@ class Lokomotyvas:
 ##    def getLokomotyvas(self):
 ##        return 
     
-    def __repr__(self):
+    def __str__(self):
         return "Lokomotyvas = %s  Mase = %s, tempiamoji galia = %s \n"%(self.name, self.mase,self.tempGalia)
 
   #  def __str__(self):

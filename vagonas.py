@@ -8,7 +8,7 @@ class Vagonas:
     
 
 
-    def __repr__(self):
+    def __str__(self):
         return "mase = %s, pavadinimas = %s, maksimali mase= %s \n" %(self.name, self.mase, self.maxMase)
 
     def addKrovinys(self, maseKrov):
@@ -32,6 +32,9 @@ class Vagonas:
 
     def getVagMaseKroviniu(self):
         return self.maseKroviniu
+    
+    def setMasKrov(self, mase):
+        self.maseKroviniu = mase
             
      
 ##        
