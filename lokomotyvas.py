@@ -14,13 +14,14 @@ class Lokomotyvas:
     
     def getLokGalia(self):
         return self.tempGalia
+    
 
     
 ##    def getLokomotyvas(self):
 ##        return 
     
     def __str__(self):
-        return "Lokomotyvas = %s  Mase = %s, tempiamoji galia = %s \n"%(self.name, self.mase,self.tempGalia)
+        return "Lokomotyvas = %s  Mase = %s, tempiamoji galia = %s "%(self.name, self.mase,self.tempGalia)
 
   #  def __str__(self):
   #      return self.name

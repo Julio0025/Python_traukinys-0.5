@@ -35,7 +35,12 @@ class Vagonas:
     
     def setMasKrov(self, mase):
         self.maseKroviniu = mase
-            
+        
+    def getVagonasName(self):
+        return self.name
+    
+    def getVagonasLaisvaMase(self):
+        return self.maxMase - self.maseKroviniu
      
 ##        
 ##    def getIdVag(self, id):
@@ -54,11 +59,7 @@ class Vagonas:
     def __name__(self):
         return "Vagonas: %s" %(self.name)
 
-    def getVagonasName(self):
-        return self.name
-    
-    def getVagonasLaisvaMase(self):
-        return self.maxMase - self.maseKroviniu
+ 
 
         
     def __unicode__(self):

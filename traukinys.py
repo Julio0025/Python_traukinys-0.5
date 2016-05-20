@@ -158,18 +158,19 @@ def openTraukinys():
     def get_id(self):
         return id
     
-##a = Traukinys("Australian_road_trasdasdaasdasdin")
-##a.addLokomotyvas(" Antano_loko ",100,500)
-##a.addLokomotyvas("Petro_loko", 80,300)
-##a.addLokomotyvas("Smetonos_loko",100,500)
-####print(a.getLokomotyvas)
-##a.addVagonas("vagons1",40,500, 350)
-####import pdb; pdb.set_trace()
-##a.addVagonas("vagons_2",50,300,123)
-##a.addVagonas("rimtas",50,500,343)
-####a.pakrautiKrovini(500)
-####a.pakrautiKrovini(100)
-####a.pakrautiKrovini(600)
+a = Traukinys("Australian_road_trasdasdaasdasdin")
+a.addLokomotyvas(" Antano_loko ",100,500)
+a.addLokomotyvas("Petro_loko", 80,300)
+a.addLokomotyvas("Smetonos_loko",100,500)
+##print(a.getLokomotyvas)
+a.addVagonas("vagons1",40,500, 350)
+##import pdb; pdb.set_trace()
+a.addVagonas("vagons_2",50,300,123)
+a.addVagonas("rimtas",50,500,343)
+a.pakrautiKrovini(500)
+a.pakrautiKrovini(100)
+a.pakrautiKrovini(600)
+
 ####a.saveTraukinys()
 ##print ("bendra mase", a.bendraMase)
 
