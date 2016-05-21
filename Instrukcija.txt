@@ -1,0 +1,7 @@
+programa valdoma meniu pasirinkimais nuo 1 iki 9
+
+programos paleidimo metu uzkraunamas "traukiniai.json" failas su issaugotais traukiniais
+
+paleidus programa butina pasirinkti traukini ir tada atliekame kitas funkcijas
+
+pasirinkus issaugoti, programa issaugos visus sukurtus ir pries tai issaugotus traukinius

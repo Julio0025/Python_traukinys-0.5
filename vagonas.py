@@ -42,25 +42,9 @@ class Vagonas:
     def getVagonasLaisvaMase(self):
         return self.maxMase - self.maseKroviniu
      
-##        
-##    def getIdVag(self, id):
-##        return self.id
-##
-##    def getForeignId(self):
-##        return self.foreign_key
-    
-##    
-##    def getVagonai(self):
-##        return "Vagonas: %s, mase = %s, maksimali mase = %s" %(self.name, self.mase, self.maxMase)
 
-    #  def __str__(self):
-   #     return self.name
-
-    def __name__(self):
-        return "Vagonas: %s" %(self.name)
-
- 
-
+    def __repr__(self):
+        return "%s" %(self.name)
         
     def __unicode__(self):
         return self.name

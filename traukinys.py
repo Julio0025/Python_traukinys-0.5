@@ -26,6 +26,7 @@ class Traukinys():
         else:
             self.vagonai.append(Vagonas(name,mase,maxMase, ID))
             self.bendraMase += mase
+            print("vagonas sekmingai pridetas")
 
     def setTrainStats(self, mase, maseK, galia):
         self.bendraKroviniuMase = maseK
@@ -38,6 +39,12 @@ class Traukinys():
     def galiaTrauk(self):
         return self.galiaTrauk
     
+    def maseTrauk(self):
+        return self.bendraMase
+    
+    def bendraKrovMaseTrauk(self):
+        return self.bendraKroviniuMase
+    
     def getLokomotyvas(self):
         return self.lokomotyvai
 
@@ -48,7 +55,12 @@ class Traukinys():
         return self.nameTraukinys
 
     def __str__(self):
-        return "traukinys: %s, Dabartine sastato mase: %s,  galia: %s" %(self.nameTraukinys, self.bendraMase, self.galiaTrauk)
+        return "traukinys: %s, Dabartine sastato mase: %s,  galia: %s, bendra kroviniu mase %s" %(self.nameTraukinys,
+                                                                                                  self.bendraMase,
+                                                                                                  self.galiaTrauk,                                                                                                  
+                                                                                                  self.bendraKroviniuMase)
+    def __repr_(self):
+        return "<%s>" %(self.name)
     
    
 
@@ -70,29 +82,20 @@ class Traukinys():
                                                                                    vagonas.getVagonasLaisvaMase()))
             return print("nepavyko prideti, reikia didesniu vagonu")
  
-    def saveTraukinys(self):
-        data = []
-        with open('traukiniai.json','r') as f:
-            for line in f:
-                data.append(json.loads(line))
-                for item in data:
-                    if item["traukinys"] == self.nameTraukinys:
-                        return print("issaugoti nepavyko, toks traukinys jau yra")
-        with open('traukiniai.json' , 'a') as fp:
-          
-           
+def saveTraukinys(traukiniai):
+    with open('traukiniai.json' , 'w') as fp:
+        for traukinys_item in traukiniai:
             lok_list = []
-            for lokomotyvas in self.lokomotyvai:
+            for lokomotyvas in traukinys_item.lokomotyvai:
                 lokomotyvai = {} 
                 lokomotyvai = { 
-    
                 "lokomotyvas" : lokomotyvas.getLokName(),
                 "mase"  : lokomotyvas.getLokMase(),
                 "galia"  : lokomotyvas.getLokGalia()}
                 lok_list.append(lokomotyvai)    
 
             vag_list = []
-            for vagonas in self.vagonai:
+            for vagonas in traukinys_item.vagonai:
                 vagonai = {}
                 vagonai = {
                 "vagonas" :vagonas.getVagName(),
@@ -103,16 +106,17 @@ class Traukinys():
                 vag_list.append(vagonai)
 
             traukinys = {
-                "traukinys":self.nameTraukinys,
-                "bendra_mase_kroviniu":self.bendraKroviniuMase,
-                "galia_traukinio":self.galiaTrauk,
-                "bendra_mase_traukinio":self.bendraMase,
+                "traukinys":traukinys_item.nameTraukinys,
+                "bendra_mase_kroviniu":traukinys_item.bendraKroviniuMase,
+                "galia_traukinio":traukinys_item.galiaTrauk,
+                "bendra_mase_traukinio":traukinys_item.bendraMase,
                 "lokomotyvai":lok_list,
                 "vagonai":vag_list
                 }
+            print(traukinys)
             json.dump(traukinys,fp)
             fp.write("\n")
-        fp.close()
+    fp.close()
 
                     
         
@@ -122,32 +126,33 @@ class Traukinys():
         
 def openTraukinys():
     data = []
+    return_listas = []
     with open('traukiniai.json','r') as f:
         for line in f:
             data.append(json.loads(line))
-            for item in data:
-                new_train = Traukinys(item["traukinys"])
-                new_train.setTrainStats(item["bendra_mase_traukinio"],
-                                        item["bendra_mase_kroviniu"],
-                                        item["galia_traukinio"])
-                if item["vagonai"]:
-                    for vagonas in item["vagonai"]:
-                        temp_vagonas = Vagonas(vagonas["vagonas"],vagonas["mase"],
-                                               vagonas["max_mase"],vagonas["ID"])
-                        temp_vagonas.setMasKrov(vagonas["kroviniu_mase"])
-                        print(temp_vagonas)
-                if item["lokomotyvai"]:
-                    for lokomotyvas in item["lokomotyvai"]:
-                        temp_lokomotyvas = Lokomotyvas(lokomotyvas["lokomotyvas"],lokomotyvas["mase"],
-                                               lokomotyvas["galia"])
-                        print(temp_lokomotyvas)
-                                               
+           
+        for item in data:
+            new_train = Traukinys(item["traukinys"])
+            new_train.setTrainStats(item["bendra_mase_traukinio"],
+                                    item["bendra_mase_kroviniu"],
+                                    item["galia_traukinio"])
+            for vagonas in item["vagonai"]:
+                temp_vagonas = Vagonas(vagonas["vagonas"],vagonas["mase"],
+                                       vagonas["max_mase"],vagonas["ID"])
+                temp_vagonas.setMasKrov(vagonas["kroviniu_mase"])
+                new_train.vagonai.append(temp_vagonas)
+                    
+            for lokomotyvas in item["lokomotyvai"]:
+                temp_lokomotyvas = Lokomotyvas(lokomotyvas["lokomotyvas"],lokomotyvas["mase"],
+                                       lokomotyvas["galia"])
+                new_train.lokomotyvai.append(temp_lokomotyvas)
+            return_listas.append(new_train)
+        return return_listas
+                                                   
 
 ##    def __repr__(self):
 ##       return "Vagonas: %s, mase = %s" %(self.name, self.mase, )
 
-    def __str__(self):
-        return self.name
     
    # def __unicode__(self):
     #    return self.name
@@ -158,21 +163,17 @@ def openTraukinys():
     def get_id(self):
         return id
     
-a = Traukinys("Australian_road_trasdasdaasdasdin")
-a.addLokomotyvas(" Antano_loko ",100,500)
-a.addLokomotyvas("Petro_loko", 80,300)
-a.addLokomotyvas("Smetonos_loko",100,500)
-##print(a.getLokomotyvas)
-a.addVagonas("vagons1",40,500, 350)
-##import pdb; pdb.set_trace()
-a.addVagonas("vagons_2",50,300,123)
-a.addVagonas("rimtas",50,500,343)
-a.pakrautiKrovini(500)
-a.pakrautiKrovini(100)
-a.pakrautiKrovini(600)
-
+##a = Traukinys("traukinys2")
+##a.addLokomotyvas(" Antano_loko ",100,500)
+##a.addVagonas("vagons1",40,500, 350)
+##listas = [a]
+##saveTraukinys(listas)
+######import pdb; pdb.set_trace()
+####a.pakrautiKrovini(100)
 ####a.saveTraukinys()
-##print ("bendra mase", a.bendraMase)
-
-##openTraukinys()
+####b = openTraukinys()
+####print(b)
+########print ("bendra mase", a.bendraMase)
+######
+##listas = openTraukinys()
 

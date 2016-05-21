@@ -1,30 +1,34 @@
 from lokomotyvas import Lokomotyvas
 from vagonas import Vagonas
 from traukinys import Traukinys
+from traukinys import openTraukinys,saveTraukinys
 
-traukiniai = []
-current_train = None
+
+traukiniai = openTraukinys()
 
 ans=True
+current_train = None
 while ans:
     if len(traukiniai) == 0:
         current_train = None
     if len(traukiniai) == 1:
         current_train = traukiniai[0]
     print ("""
-    ------>>>>> %s
+    Dabartinis pasirinktas traukinys >>>>> %s
     1.Sukurti traukini 
     2.Prideti lokomotyva
     3.Prideti vagona
     4.Prideti krovini
-    5.Pasikeisti Dabartini traukini
-    6.Istrinti dabartinti traukini arba jo vagona/lokomotyva
-    7.Issaugoti dabartinius turimus traukinius
-    8.Uzkrauti issaugotus traukinius
+    5.Perziureti surusiuota sarasa traukinu
+    6.Pasikeisti Dabartini traukini
+    7.Istrinti dabartinti traukini arba jo vagona/lokomotyva
+    8.Issaugoti dabartinius turimus traukinius
+    9.Baigti darba
     
     """%(current_train))
     try:
         choice = int(input())
+###########################################################
         if choice==1:
             print("iveskite norima traukinio pavadinima")
             try:
@@ -34,6 +38,7 @@ while ans:
                 print("pavyko")
             except ValueError:
                 print("blogai ivedet")
+###########################################################
         elif choice==2:
             if current_train == None:
                 print("is pradziu pasirinkite/pridekite nauja traukini")
@@ -46,12 +51,16 @@ while ans:
                     mas_lok = int(input())
                     print("2) Tempiamaja galia")
                     tempGalia_lok = int(input())
+##                    if tempGalia_lok < 0
+##                        print("negalimas neigiamas skaicius")
+                    if mas_lok < 0 or tempGalia_lok < 0:
+                        raise ValueError
                     current_train.addLokomotyvas(name_lok,mas_lok,tempGalia_lok)
                 except ValueError:
-                    print("blogai ivedet duomenis")
+                    print("blogai ivedet duomenis,lokomotyvas nepridetas ")
             except ValueError:
                 print("blogai ivedet pavadinima")
-                
+#############################################################                
         elif choice==3:
             if current_train == None:
                 print("is pradziu pasirinkite/pridekite nauja traukini")
@@ -66,41 +75,75 @@ while ans:
                     maseM_vag = int(input())
                     print("3) Vagono ID")
                     ID = int(input())
+                    if mase_vag < 0 or maseM_vag < 0:
+                        raise ValueError
                     current_train.addVagonas(name_vag,mase_vag,maseM_vag, ID)
                 except ValueError:
-                    print("ivedet ne skaiciu")
+                    print("blogai ivedet duomenis, vagonas nepridetas")
             except ValueError:
                 print("blogai ivedet pavadinima")
-            
+###############################################################            
         elif choice==4:
+            if current_train == None:
+                print("is pradziu pridekite traukini")
             if current_train.vagonai == []:
                 print("is pradziu pridekite vagona")
                 continue
             print("Iveskite mase krovinio")
             try:
                 input_krov = int(input())
+                if input_krov < 0:
+                    raise ValueError
                 current_train.pakrautiKrovini(input_krov)
             except ValueError:
                 print("blogai ivedet duomenis")
-                
-        elif choice==5:
+############################################################
+        elif choice ==5:
+            cnt = 0
+            print("""pasirinkite kaip norite surusiuoti traukinius
+                  1) Bendra mase
+                  2) Bendra galia
+                  3) bendra Kroviniu mase
+                  """)
+            try:
+                input_sort = int(input())
+                if input_sort < 0 or input_sort > 4:
+                    raise ValueError
+                if input_sort == 1:
+                    def maseTrauk(traukinys):
+                        return traukinys.bendraMase
+                    print(sorted(traukiniai,key = maseTrauk))
+                if input_sort == 2:
+                    def galiaTrauk(traukinys):
+                        return traukinys.galiaTrauk
+                    print(sorted(traukiniai,key = galiaTrauk))
+                if input_sort == 3:
+                    def bendraKrovMaseTrauk(traukinys):
+                        return traukinys.bendraKrovMaseTrauk
+                    print(sorted(traukiniai,key = bendraKrovMaseTrauk))
+            except ValueError:
+                print("Netinkamai ivestas pasirinkimas")
+##############################################################                
+        elif choice==6:
             cnt = 0
             if len(traukiniai) == 0 or len(traukiniai) == 1:
                 print("Neturite is ko rinktis, pridekite nauja traukini")
-                try:
-                    input_mas = int(input())
-                except ValueError:
-                    print("ivedet ne skaiciu")
+                continue
+                print("ivedet ne skaiciu")
             for traukinys in traukiniai:
                 cnt += 1
                 print(cnt, " " , traukinys)
             try:
-                nmber = int(input())
+                nmber = int(input())-1
             except ValueError:
                  print("ivedet ne skaiciu")
-            current_train = traukiniai[nmber-1]
-            
-        elif choice==6:
+                 continue
+            if nmber < 0 or nmber > len(traukiniai)-1:
+                print("tokio traukinio nera")
+                continue
+            current_train = traukiniai[nmber]
+#############################################################            
+        elif choice==7:
             if current_train == None:
                 print("nepasirinktas traukinys")
                 continue
@@ -114,6 +157,9 @@ while ans:
             except ValueError:
                 print("ivedet ne skaiciu")
             if choice_del==1:
+                if current_train == None:
+                    print("nepasirinktas traukinys")
+                    continue
                 traukiniai.remove(current_train)
                 if len(traukiniai) != 0:
                     current_train = traukiniai[0]
@@ -155,13 +201,13 @@ while ans:
                         print("istrinta")
                 except ValueError:
                     print("blogai ivestas skaiciu")
-##          
             else:
                 print("neteisingai ivestas pasirinkimas")
                 continue
-                 
-                
-        elif choice ==10:
+#####################################################################
+        elif choice ==8:
+            saveTraukinys(traukiniai)
+        elif choice ==9:
             print("aciu kad dirbote")
             ans=False
     except ValueError:

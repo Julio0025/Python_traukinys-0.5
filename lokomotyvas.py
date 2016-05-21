@@ -15,21 +15,9 @@ class Lokomotyvas:
     def getLokGalia(self):
         return self.tempGalia
     
-
-    
-##    def getLokomotyvas(self):
-##        return 
+    def __repr__(self):
+        return "%s" %(self.name)
     
     def __str__(self):
         return "Lokomotyvas = %s  Mase = %s, tempiamoji galia = %s "%(self.name, self.mase,self.tempGalia)
 
-  #  def __str__(self):
-  #      return self.name
-##    
-##    def __unicode__(self):
-##        return self.name
-##
-##    def __len__(self,):
-##        return self._len__
-##
-##
