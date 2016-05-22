@@ -1,18 +1,20 @@
 class Vagonas:
-    def __init__(self,name, mase, maxMase,ID):
+
+    def __init__(self, name, mase, maxMase, ID):
         self.name = name
         self.mase = mase
         self.maxMase = maxMase
         self.ID = ID
         self.maseKroviniu = 0
-    
-
 
     def __str__(self):
-        return "mase = %s, pavadinimas = %s, maksimali mase= %s \n" %(self.name, self.mase, self.maxMase)
+        return "pavadinimas = %s, mase  = %s, maksimali mase= %s, mase kroviniu = %s \n" % (self.name,
+                                                                        self.mase,
+                                                                        self.maxMase,
+                                                                        self.maseKroviniu )
 
     def addKrovinys(self, maseKrov):
-        if  self.maxMase >= maseKrov + self.maseKroviniu:
+        if self.maxMase >= maseKrov + self.maseKroviniu:
             self.maseKroviniu += maseKrov
             print(self.maseKroviniu)
             return True
@@ -20,10 +22,10 @@ class Vagonas:
 
     def getVagName(self):
         return self.name
-    
+
     def getVagMase(self):
         return self.mase
-    
+
     def getVagMaxMase(self):
         return self.maxMase
 
@@ -32,20 +34,19 @@ class Vagonas:
 
     def getVagMaseKroviniu(self):
         return self.maseKroviniu
-    
+
     def setMasKrov(self, mase):
         self.maseKroviniu = mase
-        
+
     def getVagonasName(self):
         return self.name
-    
+
     def getVagonasLaisvaMase(self):
         return self.maxMase - self.maseKroviniu
-     
 
     def __repr__(self):
-        return "%s" %(self.name)
-        
+        return "%s" % (self.name)
+
     def __unicode__(self):
         return self.name
 
