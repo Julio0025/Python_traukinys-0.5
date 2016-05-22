@@ -7,36 +7,31 @@ import doctest
 
 def Navigacija():
     """test init
-	>>> a = Traukinys("Traukinys")
-        >>> Navigacija()
-        >>> print(a)
-        traukinys: Traukinys, Dabartine sastato mase: 140,
-                   galia: 500, bendra kroviniu mase 0
-                   lokomotyvu = 1, vagonu = 1
+	
+
+    
         >>> 1
-        
-        >>> a.addLokomotyvas(" Antano_loko ",100,500)
-        lokomotyvas sekmingai pridetas
-        
-        >>> a.addVagonas("vagons1",40,500, 350)
-        vagonas sekmingai pridetas
-        
-        >>> print(a)
-        traukinys: Traukinys, Dabartine sastato mase: 140,
-                   galia: 500, bendra kroviniu mase 0
-                   lokomotyvu = 1, vagonu = 1 
-        
-        >>> a.pakrautiKrovini(100)
-        pavyko prideti krovini i vagons1 dar liko 400 vietos siame vagone
+                
+
         
     """
  
     traukiniai = openTraukinys()
     ans = True
-    current_train = None
+    if len(traukiniai) >= 0:
+        current_train = traukiniai[0]
+    else:
+        current_train = None
+        
 
     
     def choice1(ans):
+        """test init
+            >>> True 
+
+    
+        
+        """
         print("iveskite norima traukinio pavadinima")
         try:
             name_trauk = input()
@@ -246,7 +241,7 @@ def Navigacija():
             current_train = traukiniai[0]
             
         print ("""
-        Dabartinis pasirinktas traukinys >>>>> %s
+        <<<<<<<< Dabartinis pasirinktas traukinys >>>>>>>\n %s 
         1.Sukurti traukini
         2.Prideti lokomotyva
         3.Prideti vagona
@@ -292,7 +287,7 @@ def Navigacija():
 
 
 if __name__ == "__main__":
-    Navigacija()
+##    Navigacija()
     doctest.testmod()
 
 
