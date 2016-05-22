@@ -100,7 +100,8 @@ while ans:
                 print("blogai ivedet duomenis")
 ############################################################
         elif choice == 5:
-            sort_list = []
+            if traukiniai == []:
+                print("nera traukiniu")
             print("""pasirinkite kaip norite surusiuoti traukinius
                   1) Bendra mase
                   2) Bendra galia
@@ -111,8 +112,6 @@ while ans:
                 if input_sort < 0 or input_sort > 4:
                     raise ValueError
                 if input_sort == 1:
-##                    for item in traukiniai:
-##                        if item.
                     def maseTrauk(traukinys):
                         return traukinys.bendraMase
                     print(sorted(traukiniai, key=maseTrauk))
