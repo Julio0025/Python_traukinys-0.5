@@ -1,6 +1,22 @@
+import doctest
 class Vagonas:
 
     def __init__(self, name, mase, maxMase, ID):
+        """test init
+	>>> a = Vagonas("vagonas",10,100,500)
+        >>> print(a)
+        pavadinimas = vagonas, mase  = 10, maksimali mase= 100, mase kroviniu = 0
+        >>> a.getVagName()
+        'vagonas'
+        >>> a.getVagMase()
+        10
+        >>> a.getVagMaxMase()
+        100
+        >>> a.getVagMaseKroviniu()
+        0
+        >>> a.getVagId()
+        500
+	"""
         self.name = name
         self.mase = mase
         self.maxMase = maxMase
@@ -8,15 +24,13 @@ class Vagonas:
         self.maseKroviniu = 0
 
     def __str__(self):
-        return "pavadinimas = %s, mase  = %s, maksimali mase= %s, mase kroviniu = %s \n" % (self.name,
+        return "pavadinimas = %s, mase  = %s, maksimali mase= %s, mase kroviniu = %s" % (self.name,
                                                                         self.mase,
                                                                         self.maxMase,
                                                                         self.maseKroviniu )
-
     def addKrovinys(self, maseKrov):
         if self.maxMase >= maseKrov + self.maseKroviniu:
             self.maseKroviniu += maseKrov
-            print(self.maseKroviniu)
             return True
         return False
 
@@ -55,5 +69,9 @@ class Vagonas:
 
     def get_id(self):
         return id
+
+
+if __name__ == "__main__":
+	doctest.testmod()
 
 

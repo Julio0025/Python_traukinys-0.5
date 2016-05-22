@@ -1,4 +1,2 @@
-{"vagonai": [{"vagonas": "vagons1", "ID": 350, "kroviniu_mase": 0, "mase": 40, "max_mase": 500}], "bendra_mase_kroviniu": 0, "lokomotyvai": [{"mase": 100, "lokomotyvas": " Antano_loko ", "galia": 500}, {"mase": 10, "lokomotyvas": "lokomotyvas1.1", "galia": 100}], "bendra_mase_traukinio": 150, "traukinys": "traukinys2", "galia_traukinio": 600}
-{"vagonai": [{"vagonas": "labas", "ID": 132, "kroviniu_mase": 0, "mase": 10, "max_mase": 100}, {"vagonas": "1230", "ID": 123, "kroviniu_mase": 0, "mase": 10, "max_mase": 1}], "bendra_mase_kroviniu": 0, "lokomotyvai": [{"mase": 10, "lokomotyvas": "labas", "galia": 1000}], "bendra_mase_traukinio": 30, "traukinys": "asdkaskd", "galia_traukinio": 1000}
-{"vagonai": [], "bendra_mase_kroviniu": 0, "lokomotyvai": [], "bendra_mase_traukinio": 0, "traukinys": "asdasd", "galia_traukinio": 0}
-{"vagonai": [], "bendra_mase_kroviniu": 0, "lokomotyvai": [], "bendra_mase_traukinio": 0, "traukinys": "asdasd5", "galia_traukinio": 0}
+{"bendra_mase_traukinio": 0, "bendra_mase_kroviniu": 0, "traukinys": "geras", "lokomotyvai": [], "vagonai": [], "galia_traukinio": 0}
+{"bendra_mase_traukinio": 0, "bendra_mase_kroviniu": 0, "traukinys": "geriausias", "lokomotyvai": [], "vagonai": [], "galia_traukinio": 0}

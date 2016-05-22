@@ -1,3 +1,4 @@
+import doctest
 from lokomotyvas import Lokomotyvas
 from vagonas import Vagonas
 import json
@@ -7,6 +8,29 @@ import codecs
 class Traukinys():
 
     def __init__(self, name):
+        """test init
+	>>> a = Traukinys("Traukinys")
+	
+        >>> print(a)
+        traukinys: Traukinys, Dabartine sastato mase: 140,
+                   galia: 500, bendra kroviniu mase 0
+                   lokomotyvu = 1, vagonu = 1      
+        
+        >>> a.addLokomotyvas(" Antano_loko ",100,500)
+        lokomotyvas sekmingai pridetas
+        
+        >>> a.addVagonas("vagons1",40,500, 350)
+        vagonas sekmingai pridetas
+        
+        >>> print(a)
+        traukinys: Traukinys, Dabartine sastato mase: 140,
+                   galia: 500, bendra kroviniu mase 0
+                   lokomotyvu = 1, vagonu = 1 
+        
+        >>> a.pakrautiKrovini(100)
+        pavyko prideti krovini i vagons1 dar liko 400 vietos siame vagone
+        
+	"""
         self.nameTraukinys = name
         self.lokomotyvai = []
         self.vagonai = []
@@ -120,7 +144,6 @@ def saveTraukinys(traukiniai):
                 "lokomotyvai": lok_list,
                 "vagonai": vag_list
             }
-            print(traukinys)
             json.dump(traukinys, fp)
             fp.write("\n")
     fp.close()
@@ -181,3 +204,5 @@ def openTraukinys():
 ######
 ##listas = openTraukinys()
 
+if __name__ == "__main__":
+	doctest.testmod()
